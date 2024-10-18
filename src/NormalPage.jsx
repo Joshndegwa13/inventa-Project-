@@ -1,12 +1,12 @@
 import React from 'react';
 
 const NormalPage = () => {
-    return (
-        <div>
-            <h1>Welcome,User!</h1>
-            <p>This is a page accessible to all users.</p>
-        </div>
-    );
+  return (
+    <div>
+      <h2 className="text-2xl font-semibold text-green-600">Welcome to the Normal User Page</h2>
+      {/* Normal user content goes here */}
+    </div>
+  );
 };
 
 export default NormalPage;

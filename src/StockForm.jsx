@@ -40,48 +40,48 @@ const StockForm = () => {
     };
 
     return (
-        <form onSubmit={handleSubmit} className="bg-white text-blue-700 p-6 rounded-lg shadow-md max-w-md mx-auto mt-10">
-            <h2 className="text-center text-blue-700 font-bold text-2xl mb-6">Add Stock Item</h2>
+        <form onSubmit={handleSubmit} className="stock-form bg-white text-blue-700 p-4 rounded-lg shadow-lg max-w-md mx-auto mt-10">
+            <h2 className="text-center text-blue-700 font-bold text-xl mb-4">Add Stock Item</h2>
 
-            <div className="mb-5">
-                <label className="block text-sm font-medium text-blue-700 mb-1">Product ID</label>
+            <div className="mb-4">
+                <label className="block text-sm font-medium text-blue-700">Product ID</label>
                 <input
                     type="text"
                     name="productId"
                     value={formData.productId}
                     onChange={handleChange}
-                    className="border border-blue-300 p-3 rounded w-full focus:outline-none focus:ring-2 focus:ring-blue-400"
+                    className="border border-blue-300 p-2 rounded w-full"
                     required
                 />
             </div>
 
-            <div className="mb-5">
-                <label className="block text-sm font-medium text-blue-700 mb-1">Product Name</label>
+            <div className="mb-4">
+                <label className="block text-sm font-medium text-blue-700">Product Name</label>
                 <input
                     type="text"
                     name="productName"
                     value={formData.productName}
                     onChange={handleChange}
-                    className="border border-blue-300 p-3 rounded w-full focus:outline-none focus:ring-2 focus:ring-blue-400"
+                    className="border border-blue-300 p-2 rounded w-full"
                     required
                 />
             </div>
 
-            <div className="mb-5">
-                <label className="block text-sm font-medium text-blue-700 mb-1">Quantity</label>
+            <div className="mb-4">
+                <label className="block text-sm font-medium text-blue-700">Quantity</label>
                 <input
                     type="number"
                     name="quantity"
                     value={formData.quantity}
                     onChange={handleChange}
-                    className="border border-blue-300 p-3 rounded w-full focus:outline-none focus:ring-2 focus:ring-blue-400"
+                    className="border border-blue-300 p-2 rounded w-full"
                     required
                 />
             </div>
 
             <button
                 type="submit"
-                className="bg-blue-500 text-white font-bold py-2 rounded hover:bg-blue-600 w-full transition duration-200"
+                className="bg-blue-500 text-white font-bold py-2 px-4 rounded hover:bg-blue-600 w-full"
             >
                 Add Stock
             </button>

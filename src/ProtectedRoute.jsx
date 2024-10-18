@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Navigate } from 'react-router-dom';
-import { auth } from './config';
+import { auth } from './firebase/firebase';
 
 const ProtectedRoute = ({ children, requiredRole }) => {
   const [userRole, setUserRole] = useState(null);
@@ -32,7 +32,21 @@ const ProtectedRoute = ({ children, requiredRole }) => {
     return children;
   }
 
-  return <Navigate to="/not-authorized" />;
+  return <Navigate to="/login" />;
 };
 
 export default ProtectedRoute;
+
+ProtectedRoute.jsx
+
+
+
+// import React from 'react';
+// import { Navigate } from 'react-router-dom'; // Assuming you're using React Router
+
+// const ProtectedRoute = ({ component: Component, isAuthenticated, ...rest }) => {
+//   return isAuthenticated ? <Component {...rest} /> : <Navigate to="/login" />;
+// };
+
+// export default ProtectedRoute;
+

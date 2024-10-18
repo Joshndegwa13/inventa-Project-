@@ -71,8 +71,8 @@ const Alerts = () => {
     }, []);
 
     return (
-        <div className="alerts-container bg-white text-blue-700 p-6 rounded-lg shadow-lg max-w-lg mx-auto mt-10">
-            <h2 className="text-center text-blue-600 font-bold text-2xl mb-6">Alerts</h2>
+        <div className="alerts-container bg-white text-blue-700 p-4 rounded-lg shadow-lg max-w-lg mx-auto mt-10">
+            <h2 className="text-center text-blue-700 font-bold text-xl mb-4">Alerts</h2>
             {alerts.length > 0 ? (
                 alerts.map((alert, index) => (
                     <div
