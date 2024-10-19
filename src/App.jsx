@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import ProtectedRoute from './ProtectedRoute'; 
 import Alerts from './Alerts';
-import StockForm from './StockForm';
+// import StockForm from './StockForm';
 import Register from './Register';
 import AdminPage from './AdminPage'; 
 import NormalPage from './NormalPage'; 
@@ -17,7 +17,7 @@ function App() {
         <header className="App-header">
           <h1 className="text-center text-3xl font-bold text-blue-700 mb-6">Stock & Order Management</h1>
           <Alerts />
-          <StockForm />
+          {/* <StockForm /> */}
           <Register />
         </header>
 
