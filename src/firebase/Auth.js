@@ -8,10 +8,10 @@ export const registerUser = async (email, password, role) => {
     const userCredential = await createUserWithEmailAndPassword(auth, email, password);
     const user = userCredential.user;
 
-    // Store user role in Firestore
+    // Store user role in Firestore firebase for difrenciating difrence between the user and superuser
     await setDoc(doc(db, 'users', user.uid), {
       email: user.email,
-      role: role, // 'superuser' or 'user'
+      role: role, //(superuser or user) the role defines either of them
     });
 
     console.log('User registered:', user);

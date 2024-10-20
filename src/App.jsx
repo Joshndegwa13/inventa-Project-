@@ -1,8 +1,8 @@
 import React from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
-import Alerts from './Alerts';
-import Register from './Register';
-import Routes from './Route'; 
+import Alerts from './Components/Alerts';
+import Register from './Components/Register';
+import Routes from './Components/Route'; 
 
 function App() {
   return (

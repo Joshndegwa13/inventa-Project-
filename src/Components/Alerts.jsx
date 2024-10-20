@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 const Alerts = () => {
     const [alerts, setAlerts] = useState([]);
 
-    // Function to fetch alerts from backend
+    //fetch alerts from backend
     const fetchAlerts = async () => {
         try {
             const response = await fetch('http://localhost:3001/api/alerts');
@@ -18,11 +18,11 @@ const Alerts = () => {
         }
     };
 
-    // Polling for alerts every 5 seconds
+    // Polling for alerts after every 5 seconds
     useEffect(() => {
         fetchAlerts(); // Fetch once on component mount
-        const intervalId = setInterval(fetchAlerts, 5000); // Poll every 5 seconds
-        return () => clearInterval(intervalId); // Cleanup on unmount
+        const intervalId = setInterval(fetchAlerts, 5000); // Poll after every 5 seconds
+        return () => clearInterval(intervalId); // Clears the interval on unmount
     }, []);
 
     return (

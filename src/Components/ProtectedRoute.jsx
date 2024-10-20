@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Navigate } from 'react-router-dom';
-import { auth } from './firebase/firebase';
+import { auth } from '../firebase/firebase';
 
 const ProtectedRoute = ({ children, requiredRole }) => {
   const [userRole, setUserRole] = useState(null);
