@@ -6,11 +6,13 @@ import ForgotPassword from './Components/Forgotpassword';
 import HomePage from './Components/HomePage';
 import AboutUs from './Components/AboutUs';
 import Contact from './Components/Contact';
+import Reports from './Components/Reports';
 
 const App = () => {
     return (
         <Routes>
             <Route path="/" element={<HomePage />} />
+            <Route path='reports' element={<Reports />} />
             <Route path="/aboutus" element={<AboutUs />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/login" element={<Login />} />
