@@ -25,7 +25,7 @@ const App = () => {
       <Route path="/sales" element={<SalesPage />} />
       <Route path="/pricing" element={<PaymentPage />} />
     </Routes>
-  );
+    );
 };
 
 export default App;
