@@ -3,22 +3,25 @@ import React, { useState, useEffect } from 'react';
 const Alerts = () => {
     const [alerts, setAlerts] = useState([]);
 
-    //fetch alerts from backend
+    // Fetch alerts 
     const fetchAlerts = async () => {
         try {
-            const response = await fetch('http://localhost:3001/api/alerts');
+            const response = await fetch('http://127.0.0.1:5000');
             const data = await response.json();
-            const allAlerts = [
-                ...data.lowStockAlerts,
-                ...data.newOrders.map(order => `New order: ${order.productId} (${order.quantity})`)
-            ];
+
+            // Check if the API returns low stock and new orders
+            const lowStockAlerts = data.lowStockAlerts.map(alert => `Low stock for product: ${alert.productId}. Only ${alert.quantity} left.`);
+            const newOrderAlerts = data.newOrders.map(order => `New order placed for: ${order.productId} (${order.quantity})`);
+
+            // Combine both types of alerts
+            const allAlerts = [...lowStockAlerts, ...newOrderAlerts];
             setAlerts(allAlerts);
         } catch (error) {
             console.error('Error fetching alerts:', error);
         }
     };
 
-    // Polling for alerts after every 5 seconds
+    // Polling for alerts every 5 seconds
     useEffect(() => {
         fetchAlerts(); // Fetch once on component mount
         const intervalId = setInterval(fetchAlerts, 5000); // Poll after every 5 seconds
