@@ -1,78 +1,67 @@
 import React, { useState } from "react";
-import ProductTable from "./Components/ProductTable";
 import AddProductForm from "./Components/AddProductForm";
-import FilterSidebar from "./Components/FilterSidebar";
+import ProductTable from "./Components/ProductTable";
+import ProductFilter from "./Components/ProductFilter";
 
-export default function App() {
+const App = () => {
   const [products, setProducts] = useState([]);
-  const [showForm, setShowForm] = useState(false);
-  const [editingProduct, setEditingProduct] = useState(null);
-  const [filteredProducts, setFilteredProducts] = useState([]);
+  const [filter, setFilter] = useState({ sku: "", name: "" });
+  const [showForm, setShowForm] = useState(false); // State to control form visibility
 
-  const addProduct = (newProduct) => {
-    if (editingProduct) {
-      setProducts(
-        products.map((product) =>
-          product.sku === editingProduct.sku ? newProduct : product
-        )
-      );
-      setEditingProduct(null);
-    } else {
-      setProducts([...products, newProduct]);
-    }
-    setFilteredProducts([...products, newProduct]); // Update filtered products after adding
+  const handleAddProduct = (newProduct) => {
+    setProducts((prev) => [...prev, newProduct]);
+    setShowForm(false); // Hide form after adding a product
   };
 
-  const editProduct = (product) => {
-    setEditingProduct(product);
-    setShowForm(true);
+  const handleEditProduct = (editedProduct) => {
+    setProducts((prev) =>
+      prev.map((product) =>
+        product.sku === editedProduct.sku ? editedProduct : product
+      )
+    );
   };
 
-  const handleFilter = ({ sku, name }) => {
-    const filtered = products.filter((product) => {
-      const matchesSku = sku ? product.sku.includes(sku) : true;
-      const matchesName = name ? product.name.toLowerCase().includes(name.toLowerCase()) : true;
-      return matchesSku && matchesName;
-    });
-    setFilteredProducts(filtered);
+  const handleDeleteProduct = (sku) => {
+    setProducts((prev) => prev.filter((product) => product.sku !== sku));
   };
 
-  // Function to handle product deletion
-  const handleDelete = (sku) => {
-    const updatedProducts = products.filter(product => product.sku !== sku);
-    setProducts(updatedProducts);
-    setFilteredProducts(updatedProducts); // Update filtered products if deletion occurs
+  const handleFilterChange = (name, value) => {
+    setFilter((prev) => ({ ...prev, [name]: value }));
   };
+
+  const filteredProducts = products.filter((product) => {
+    return (
+      (filter.sku === "" || product.sku.includes(filter.sku)) &&
+      (filter.name === "" || product.name.toLowerCase().includes(filter.name.toLowerCase()))
+    );
+  });
 
   return (
-    <div className="flex min-h-screen bg-gray-100">
-      <FilterSidebar onFilter={handleFilter} />
-      <div className="flex-1 p-6 bg-white shadow-lg">
-        <div className="flex justify-between items-center">
-          <h1 className="text-3xl font-bold text-blue-600">Products</h1>
-          <button
-            onClick={() => setShowForm(true)}
-            className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition"
-          >
-            + Add Product
-          </button>
-        </div>
-        <ProductTable 
-          products={filteredProducts.length > 0 ? filteredProducts : products} 
-          onEdit={editProduct} 
-          onDelete={handleDelete} // Pass delete handler to ProductTable
-        />
-        {showForm && (
-          <AddProductForm
-            onClose={() => {
-              setShowForm(false);
-              setEditingProduct(null);
-            }}
-            onAdd={addProduct}
-            productToEdit={editingProduct}
-          />
-        )}
+    <div className="p-6">
+      <h1 className="text-2xl font-bold text-blue-600 mb-6">Product Inventory</h1>
+      {/* Button to show the Add Product Form */}
+      <div className="flex items-center mb-4">
+        <ProductFilter filter={filter} onFilterChange={handleFilterChange} />
+        <button
+          onClick={() => setShowForm((prev) => !prev)} // Toggle form visibility
+          className="ml-4 bg-green-600 text-white px-4 py-2 rounded-md hover:bg-green-700 transition duration-300"
+        >
+          +
+        </button>
       </div>
+      {showForm && (
+        <AddProductForm 
+          onAdd={handleAddProduct} 
+          onClose={() => setShowForm(false)} // Pass onClose to hide the form
+        />
+      )}
+      <ProductTable
+        products={filteredProducts}
+        onEdit={handleEditProduct}
+        onDelete={handleDeleteProduct}
+      />
     </div>
   );
-}
+};
+
+export default App;

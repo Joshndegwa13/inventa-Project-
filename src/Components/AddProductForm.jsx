@@ -25,7 +25,7 @@ const AddProductForm = ({ onClose, onAdd, productToEdit }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     onAdd(product);
-    onClose();
+    onClose(); // Close the form after adding
   };
 
   return (
@@ -112,7 +112,8 @@ const AddProductForm = ({ onClose, onAdd, productToEdit }) => {
               {productToEdit ? "Update Product" : "Add Product"}
             </button>
             <button
-              onClick={onClose}
+              onClick={onClose} // Use onClose to cancel
+              type="button" // Change to button to avoid form submission
               className="bg-gray-300 text-black px-6 py-3 rounded-full hover:bg-gray-400 transition shadow-md hover:shadow-lg"
             >
               Cancel
