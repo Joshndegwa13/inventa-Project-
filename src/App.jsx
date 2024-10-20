@@ -1,12 +1,14 @@
 
-import './App.css'
 
-function App() {
+import React from 'react';
+import HomePage from './Components/HomePage';
 
-  return (
-    <>
-    </>
-  )
-}
+const App = () => {
+    return (
+        <div>
+            <HomePage />
+        </div>
+    );
+};
 
-export default App
+export default App;
