@@ -69,7 +69,7 @@ function Login() {
               <a 
               href="#" 
               className="text-blue-600 hover:underline"
-              onClick={() => navigate('/forgot-password')}
+              onClick={() => navigate('/forgotpassword')}
               >Forgot Password?
               </a>
             </p>
