@@ -37,16 +37,5 @@ const ProtectedRoute = ({ children, requiredRole }) => {
 
 export default ProtectedRoute;
 
-ProtectedRoute.jsx
 
-
-
-// import React from 'react';
-// import { Navigate } from 'react-router-dom'; // Assuming you're using React Router
-
-// const ProtectedRoute = ({ component: Component, isAuthenticated, ...rest }) => {
-//   return isAuthenticated ? <Component {...rest} /> : <Navigate to="/login" />;
-// };
-
-// export default ProtectedRoute;
 

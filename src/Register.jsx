@@ -1,4 +1,3 @@
-// Register.jsx
 import React, { useState } from 'react';
 import { registerUser } from './firebase/Auth'; 
 
@@ -8,27 +7,33 @@ const Register = () => {
   const [role, setRole] = useState('user');
   const [message, setMessage] = useState(''); 
   const [showMessage, setShowMessage] = useState(false);
+  const [isLoading, setIsLoading] = useState(false); // New state for loading
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsLoading(true); // Start loading state  
     try {
       await registerUser(email, password, role);
 
       // Set the success message based on role
       setMessage(`${role === 'superuser' ? 'Superuser' : 'User'} registered successfully`);
-      setShowMessage(true); // Show the message
+      setShowMessage(true);
 
-      // Clear the form fields
+      // Clear the form
       setEmail('');
       setPassword('');
       setRole('user');
 
-      // Hide the message after 3 seconds
+      // Hide the message
       setTimeout(() => {
         setShowMessage(false);
       }, 3000);
     } catch (error) {
       console.error('Error registering user:', error);
+      setMessage('Error registering user, please try again.');
+      setShowMessage(true);
+    } finally {
+      setIsLoading(false); 
     }
   };
 
@@ -69,12 +74,14 @@ const Register = () => {
         <button
           type="submit"
           className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600"
+          disabled={isLoading} 
         >
-          Register
+          {isLoading ? 'Registering...' : 'Register'} {/* Show loading text */}
         </button>
       </form>
 
-      {/* Success message */}
+      {isLoading && <p className="mt-4 text-blue-500">Please wait, registering...</p>}
+
       {showMessage && (
         <div className="mt-4 p-2 bg-green-200 text-green-800 rounded">
           {message}
