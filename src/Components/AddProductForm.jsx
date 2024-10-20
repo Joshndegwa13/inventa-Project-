@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-const AddProductForm = ({ onClose, onAdd, productToEdit }) => {
+const AddProductForm = ({ history, location }) => {
   const [product, setProduct] = useState({
     name: "",
     sku: "",
@@ -12,6 +12,9 @@ const AddProductForm = ({ onClose, onAdd, productToEdit }) => {
     price: "",
   });
 
+  const productToEdit = location?.state?.productToEdit;
+
+  // Use effect to set the product if editing an existing one
   useEffect(() => {
     if (productToEdit) {
       setProduct(productToEdit);
@@ -24,8 +27,8 @@ const AddProductForm = ({ onClose, onAdd, productToEdit }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onAdd(product);
-    onClose(); // Close the form after adding
+    // Add/update product logic here
+    history.push("/product-table");
   };
 
   return (
@@ -112,8 +115,8 @@ const AddProductForm = ({ onClose, onAdd, productToEdit }) => {
               {productToEdit ? "Update Product" : "Add Product"}
             </button>
             <button
-              onClick={onClose} // Use onClose to cancel
-              type="button" // Change to button to avoid form submission
+              onClick={() => history.push("/product-table")}
+              type="button"
               className="bg-gray-300 text-black px-6 py-3 rounded-full hover:bg-gray-400 transition shadow-md hover:shadow-lg"
             >
               Cancel

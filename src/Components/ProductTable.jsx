@@ -1,7 +1,21 @@
+// ProductTable.jsx (continued)
 import React from "react";
 import { FaPen, FaTrash } from "react-icons/fa";
 
-const ProductTable = ({ products, onEdit, onDelete }) => {
+const ProductTable = ({ history, location }) => {
+  const products = location?.state?.products || [];
+
+  const handleEdit = (product) => {
+    history.push({
+      pathname: "/add-product",
+      state: { productToEdit: product },
+    });
+  };
+
+  const handleDelete = (sku) => {
+    // Delete logic here
+  };
+
   return (
     <div className="mt-6 overflow-x-auto">
       <table className="min-w-full bg-white shadow-lg rounded-lg border border-gray-200">
@@ -28,31 +42,49 @@ const ProductTable = ({ products, onEdit, onDelete }) => {
           ) : (
             products.map((product, index) => (
               <tr
-                key={index}
+                key={product.sku}
                 className={`border-b hover:bg-gray-100 transition duration-150 ${
                   index % 2 === 0 ? "bg-gray-50" : "bg-white"
                 }`}
               >
-                <td className="py-4 px-4 text-sm text-gray-700">{product.name}</td>
-                <td className="py-4 px-4 text-sm text-gray-700">{product.sku}</td>
-                <td className="py-4 px-4 text-sm text-gray-700">{product.condition}</td>
-                <td className="py-4 px-4 text-sm text-gray-700">{product.location}</td>
-                <td className="py-4 px-4 text-sm text-gray-700">{product.available}</td>
-                <td className="py-4 px-4 text-sm text-gray-700">{product.reserved}</td>
-                <td className="py-4 px-4 text-sm text-gray-700">{product.onHand}</td>
-                <td className="py-4 px-4 text-sm text-gray-700">${product.price}</td>
+                <td className="py-4 px-4 text-sm text-gray-700">
+                  {product.name}
+                </td>
+                <td className="py-4 px-4 text-sm text-gray-700">
+                  {product.sku}
+                </td>
+                <td className="py-4 px-4 text-sm text-gray-700">
+                  {product.condition}
+                </td>
+                <td className="py-4 px-4 text-sm text-gray-700">
+                  {product.location}
+                </td>
+                <td className="py-4 px-4 text-sm text-gray-700">
+                  {product.available}
+                </td>
+                <td className="py-4 px-4 text-sm text-gray-700">
+                  {product.reserved}
+                </td>
+                <td className="py-4 px-4 text-sm text-gray-700">
+                  {product.onHand}
+                </td>
+                <td className="py-4 px-4 text-sm text-gray-700">
+                  ${product.price}
+                </td>
                 <td className="py-4 px-4 flex space-x-2">
                   <button
-                    onClick={() => onEdit(product)}
+                    onClick={() => handleEdit(product)}
                     className="flex items-center justify-center w-8 h-8 bg-blue-600 text-white rounded-full hover:bg-blue-700 transition shadow-md"
                     title="Edit Product"
+                    aria-label={`Edit ${product.name}`}
                   >
                     <FaPen />
                   </button>
                   <button
-                    onClick={() => onDelete(product.sku)} // Pass SKU for deletion
+                    onClick={() => handleDelete(product.sku)}
                     className="flex items-center justify-center w-8 h-8 bg-red-600 text-white rounded-full hover:bg-red-700 transition shadow-md"
                     title="Delete Product"
+                    aria-label={`Delete ${product.name}`}
                   >
                     <FaTrash />
                   </button>
