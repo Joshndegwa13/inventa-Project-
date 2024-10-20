@@ -6,8 +6,10 @@ import salesManagementImage from '../Components/images/sales-management.jpg';
 import carouselImage1 from '../Components/images/carousel-1.jpg';
 import carouselImage2 from '../Components/images/carousel-2.jpg';
 import carouselImage3 from '../Components/images/carousel-3.jpg';
+import { useNavigate } from 'react-router-dom';
 
 const HomePage = () => {
+      const navigate = useNavigate(); 
     const settings = {
         dots: true,                 // Show dots for navigation
         infinite: true,             // Loop through images infinitely
@@ -25,10 +27,14 @@ const HomePage = () => {
             <header className="flex justify-between items-center p-6 bg-blue-700 text-white shadow-lg">
                 <h1 className="text-4xl font-bold tracking-wide">Inventa</h1>
                 <nav>
-                    <button className="mr-4 px-6 py-2 bg-white text-blue-700 rounded-lg shadow hover:bg-blue-100 transition duration-300 font-semibold">
+                    <button className="mr-4 px-6 py-2 bg-white text-blue-700 rounded-lg shadow hover:bg-blue-100 transition duration-300 font-semibold"
+                        onClick={() => navigate('/login')}
+                        >
                         Login
                     </button>
-                    <button className="px-6 py-2 bg-white text-blue-700 rounded-lg shadow hover:bg-blue-100 transition duration-300 font-semibold">
+                    <button className="px-6 py-2 bg-white text-blue-700 rounded-lg shadow hover:bg-blue-100 transition duration-300 font-semibold"
+                        onClick={() => navigate('/register')}   
+                        >
                         Sign Up
                     </button>
                 </nav>
@@ -74,7 +80,9 @@ const HomePage = () => {
                 </div>
 
                 {/* Get Started Button with animation */}
-                <button className="mt-10 mb-16 px-8 py-4 bg-blue-600 text-white rounded-lg shadow-lg text-lg font-bold hover:bg-blue-700 transform transition-all duration-300 hover:scale-110">
+                <button className="mt-10 mb-16 px-8 py-4 bg-blue-600 text-white rounded-lg shadow-lg text-lg font-bold hover:bg-blue-700 transform transition-all duration-300 hover:scale-110"
+                onClick={() => navigate('/register')}
+                >
                     Get Started
                 </button>
 
