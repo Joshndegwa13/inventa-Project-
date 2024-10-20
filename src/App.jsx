@@ -1,18 +1,20 @@
 import React, { useState } from "react";
 import AddProductForm from "./Components/AddProductForm";
 import ProductTable from "./Components/ProductTable";
-import ProductFilter from "./Components/ProductFilter";
+import ProductFilter from "./Components/ProductFilter"; 
 
 const App = () => {
-  const [products, setProducts] = useState([]);
-  const [filter, setFilter] = useState({ sku: "", name: "" });
-  const [showForm, setShowForm] = useState(false); // State to control form visibility
-
+  const [products, setProducts] = useState([]); // State to hold the list of products
+  const [filter, setFilter] = useState({ sku: "", name: "" }); // State to hold filter criteria
+  const [showAddProductForm, setShowAddProductForm] = useState(false); // State to control the visibility of AddProductForm
+  
+  // Function to add a new product
   const handleAddProduct = (newProduct) => {
     setProducts((prev) => [...prev, newProduct]);
-    setShowForm(false); // Hide form after adding a product
+    setShowAddProductForm(false); // Hide the form after adding
   };
 
+  // Function to edit an existing product
   const handleEditProduct = (editedProduct) => {
     setProducts((prev) =>
       prev.map((product) =>
@@ -21,42 +23,39 @@ const App = () => {
     );
   };
 
+  // Function to delete a product
   const handleDeleteProduct = (sku) => {
     setProducts((prev) => prev.filter((product) => product.sku !== sku));
   };
 
+  // Function to handle filter changes
   const handleFilterChange = (name, value) => {
     setFilter((prev) => ({ ...prev, [name]: value }));
   };
 
-  const filteredProducts = products.filter((product) => {
-    return (
-      (filter.sku === "" || product.sku.includes(filter.sku)) &&
-      (filter.name === "" || product.name.toLowerCase().includes(filter.name.toLowerCase()))
-    );
-  });
-
   return (
     <div className="p-6">
       <h1 className="text-2xl font-bold text-blue-600 mb-6">Product Inventory</h1>
-      {/* Button to show the Add Product Form */}
-      <div className="flex items-center mb-4">
-        <ProductFilter filter={filter} onFilterChange={handleFilterChange} />
-        <button
-          onClick={() => setShowForm((prev) => !prev)} // Toggle form visibility
-          className="ml-4 bg-green-600 text-white px-4 py-2 rounded-md hover:bg-green-700 transition duration-300"
-        >
-          +
-        </button>
-      </div>
-      {showForm && (
-        <AddProductForm 
-          onAdd={handleAddProduct} 
-          onClose={() => setShowForm(false)} // Pass onClose to hide the form
-        />
+      <ProductFilter filter={filter} onFilterChange={handleFilterChange} />
+      
+      {/* Plus Button to add product */}
+      <button
+        onClick={() => setShowAddProductForm(!showAddProductForm)}
+        className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition"
+      >
+        +
+      </button>
+      
+      {/* Show AddProductForm only when showAddProductForm is true */}
+      {showAddProductForm && (
+        <AddProductForm onAdd={handleAddProduct} onClose={() => setShowAddProductForm(false)} />
       )}
+
       <ProductTable
-        products={filteredProducts}
+        products={products.filter((product) =>
+          (filter.sku === "" || product.sku.includes(filter.sku)) &&
+          (filter.name === "" || product.name.toLowerCase().includes(filter.name.toLowerCase()))
+        )}
         onEdit={handleEditProduct}
         onDelete={handleDeleteProduct}
       />

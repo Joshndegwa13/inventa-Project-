@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-const AddProductForm = ({ onClose, onAdd, productToEdit }) => {
+const AddProductForm = ({ onAdd, productToEdit, onClose }) => {
   const [product, setProduct] = useState({
     name: "",
     sku: "",
@@ -12,6 +12,7 @@ const AddProductForm = ({ onClose, onAdd, productToEdit }) => {
     price: "",
   });
 
+  // Use effect to set the product if editing an existing one
   useEffect(() => {
     if (productToEdit) {
       setProduct(productToEdit);
@@ -24,8 +25,8 @@ const AddProductForm = ({ onClose, onAdd, productToEdit }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onAdd(product);
-    onClose(); // Close the form after adding
+    onAdd(product); // Call onAdd passed from App
+    onClose(); // Close the form after adding/updating the product
   };
 
   return (

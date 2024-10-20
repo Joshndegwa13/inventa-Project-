@@ -1,4 +1,3 @@
-// src/components/ProductFilter.jsx
 import React from "react";
 
 const ProductFilter = ({ filter, onFilterChange }) => {
@@ -15,7 +14,7 @@ const ProductFilter = ({ filter, onFilterChange }) => {
         value={filter.sku}
         onChange={handleChange}
         placeholder="Filter by SKU"
-        className="border border-gray-300 p-2 rounded-md w-full"
+        className="border border-gray-300 p-2 rounded-md w-full focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-blue-500"
       />
       <input
         type="text"
@@ -23,7 +22,7 @@ const ProductFilter = ({ filter, onFilterChange }) => {
         value={filter.name}
         onChange={handleChange}
         placeholder="Filter by Name"
-        className="border border-gray-300 p-2 rounded-md w-full"
+        className="border border-gray-300 p-2 rounded-md w-full focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-blue-500"
       />
     </div>
   );

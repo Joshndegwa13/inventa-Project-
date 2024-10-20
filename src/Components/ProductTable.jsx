@@ -28,7 +28,7 @@ const ProductTable = ({ products, onEdit, onDelete }) => {
           ) : (
             products.map((product, index) => (
               <tr
-                key={index}
+                key={product.sku} // Use SKU as a unique key
                 className={`border-b hover:bg-gray-100 transition duration-150 ${
                   index % 2 === 0 ? "bg-gray-50" : "bg-white"
                 }`}
@@ -46,6 +46,7 @@ const ProductTable = ({ products, onEdit, onDelete }) => {
                     onClick={() => onEdit(product)}
                     className="flex items-center justify-center w-8 h-8 bg-blue-600 text-white rounded-full hover:bg-blue-700 transition shadow-md"
                     title="Edit Product"
+                    aria-label={`Edit ${product.name}`}
                   >
                     <FaPen />
                   </button>
@@ -53,6 +54,7 @@ const ProductTable = ({ products, onEdit, onDelete }) => {
                     onClick={() => onDelete(product.sku)} // Pass SKU for deletion
                     className="flex items-center justify-center w-8 h-8 bg-red-600 text-white rounded-full hover:bg-red-700 transition shadow-md"
                     title="Delete Product"
+                    aria-label={`Delete ${product.name}`}
                   >
                     <FaTrash />
                   </button>
