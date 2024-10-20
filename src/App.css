@@ -1,0 +1,14 @@
+@keyframes slide-in-right {
+  0% {
+    transform: translateX(100%); /* Start off-screen to the right */
+    opacity: 0; /* Optional: Make it invisible at the start */
+  }
+  100% {
+    transform: translateX(0); /* Slide into position */
+    opacity: 1; /* Optional: Make it fully visible */
+  }
+}
+
+.slide-in-right {
+  animation: slide-in-right 0.5s ease-out forwards; /* Adjust the duration and easing as necessary */
+}
