@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Slider from 'react-slick';
 import productInventoryImage from '../Components/images/product-inventory.jpg';
 import stockTrackingImage from '../Components/images/stock-tracking.jpg';
@@ -9,16 +9,27 @@ import carouselImage3 from '../Components/images/carousel-3.jpg';
 import { useNavigate } from 'react-router-dom';
 
 const HomePage = () => {
-      const navigate = useNavigate(); 
+    const navigate = useNavigate();
+    const [typingComplete, setTypingComplete] = useState(false);
+
+    useEffect(() => {
+        // Set the typing complete state after 4 seconds, when the typing animation finishes
+        const timer = setTimeout(() => {
+            setTypingComplete(true);
+        }, 4000);
+
+        return () => clearTimeout(timer); // Cleanup the timer
+    }, []);
+
     const settings = {
-        dots: true,                 // Show dots for navigation
-        infinite: true,             // Loop through images infinitely
-        speed: 500,                 // Transition speed
-        slidesToShow: 1,            // Show only one image at a time
-        slidesToScroll: 1,          // Scroll one image at a time
-        autoplay: true,             // Automatically transition through images
-        autoplaySpeed: 3000,        // Slide every 3 seconds
-        arrows: false               // Disable next/prev arrows (optional)
+        dots: true,
+        infinite: true,
+        speed: 500,
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        autoplay: true,
+        autoplaySpeed: 3000,
+        arrows: false,
     };
 
     return (
@@ -27,14 +38,16 @@ const HomePage = () => {
             <header className="flex justify-between items-center p-6 bg-blue-700 text-white shadow-lg">
                 <h1 className="text-4xl font-bold tracking-wide">Inventa</h1>
                 <nav>
-                    <button className="mr-4 px-6 py-2 bg-white text-blue-700 rounded-lg shadow hover:bg-blue-100 transition duration-300 font-semibold"
+                    <button
+                        className="mr-4 px-6 py-2 bg-white text-blue-700 rounded-lg shadow hover:bg-blue-100 transition duration-300 font-semibold"
                         onClick={() => navigate('/login')}
-                        >
+                    >
                         Login
                     </button>
-                    <button className="px-6 py-2 bg-white text-blue-700 rounded-lg shadow hover:bg-blue-100 transition duration-300 font-semibold"
-                        onClick={() => navigate('/register')}   
-                        >
+                    <button
+                        className="px-6 py-2 bg-white text-blue-700 rounded-lg shadow hover:bg-blue-100 transition duration-300 font-semibold"
+                        onClick={() => navigate('/register')}
+                    >
                         Sign Up
                     </button>
                 </nav>
@@ -42,7 +55,8 @@ const HomePage = () => {
 
             {/* Main Content */}
             <main className="flex-grow flex flex-col items-center justify-center text-center p-10">
-                <h2 className="text-5xl font-bold mb-8 text-blue-800 leading-tight">
+                {/* Title with Typewriter Effect */}
+                <h2 className={`text-5xl font-bold mb-8 text-blue-800 leading-tight typewriter ${typingComplete ? 'typing-complete' : ''}`}>
                     Simple Inventory Management Software
                 </h2>
                 <p className="mb-16 text-lg text-gray-600 leading-relaxed max-w-2xl mx-auto">
@@ -56,7 +70,9 @@ const HomePage = () => {
                         <img src={productInventoryImage} alt="Product Inventory" className="w-full h-48 object-contain" />
                         <div className="p-6">
                             <h3 className="font-bold text-xl mb-2 text-blue-600">Manage Your Products</h3>
-                            <p className="text-gray-600">Easily add, edit, and track products in your inventory with user-friendly interfaces.</p>
+                            <p className="text-gray-600">
+                                Easily add, edit, and track products in your inventory with user-friendly interfaces.
+                            </p>
                         </div>
                     </div>
 
@@ -65,7 +81,9 @@ const HomePage = () => {
                         <img src={stockTrackingImage} alt="Real-Time Stock Tracking" className="w-full h-48 object-contain" />
                         <div className="p-6">
                             <h3 className="font-bold text-xl mb-2 text-blue-600">Real-Time Stock Tracking</h3>
-                            <p className="text-gray-600">Stay updated with instant alerts for low stock levels and manage inventory efficiently.</p>
+                            <p className="text-gray-600">
+                                Stay updated with instant alerts for low stock levels and manage inventory efficiently.
+                            </p>
                         </div>
                     </div>
 
@@ -74,40 +92,50 @@ const HomePage = () => {
                         <img src={salesManagementImage} alt="Sales Management" className="w-full h-48 object-contain" />
                         <div className="p-6">
                             <h3 className="font-bold text-xl mb-2 text-blue-600">Sales Management Made Easy</h3>
-                            <p className="text-gray-600">Record transactions seamlessly and manage sales effectively with advanced reporting tools.</p>
+                            <p className="text-gray-600">
+                                Record transactions seamlessly and manage sales effectively with advanced reporting tools.
+                            </p>
                         </div>
                     </div>
                 </div>
 
-                {/* Get Started Button with animation */}
-                <button className="mt-10 mb-16 px-8 py-4 bg-blue-600 text-white rounded-lg shadow-lg text-lg font-bold hover:bg-blue-700 transform transition-all duration-300 hover:scale-110"
-                onClick={() => navigate('/register')}
+                {/* Get Started Button */}
+                <button
+                    className="mt-10 mb-16 px-8 py-4 bg-blue-600 text-white rounded-lg shadow-lg text-lg font-bold hover:bg-blue-700 transform transition-all duration-300 hover:scale-110"
+                    onClick={() => navigate('/login')}
                 >
                     Get Started
                 </button>
 
-                {/* Image Carousel with React Slick */}
-                <div className="relative overflow-hidden w-3/4 mx-auto mb-10" style={{ transform: 'translateX(25%)' }}>
+                {/* Bold Text Below the Button */}
+                <div className="mb-8 text-right max-w-3xl mx-auto">
+                    <p className="font-bold text-lg text-blue-800">
+                        Organize and automate your inventory at the touch of a button.
+                    </p>
+                </div>
+
+                {/* Image Carousel */}
+                <div className="relative overflow-hidden w-full max-w-3xl mx-auto mb-10">
                     <Slider {...settings}>
                         <div>
                             <img
                                 src={carouselImage1}
                                 alt="Carousel Image 1"
-                                className="shadow-2xl rounded-lg transform transition-transform duration-500 hover:scale-105"
+                                className="w-full h-64 object-cover shadow-2xl rounded-lg transform transition-transform duration-500 hover:scale-105"
                             />
                         </div>
                         <div>
                             <img
                                 src={carouselImage2}
                                 alt="Carousel Image 2"
-                                className="shadow-2xl rounded-lg transform transition-transform duration-500 hover:scale-105"
+                                className="w-full h-64 object-cover shadow-2xl rounded-lg transform transition-transform duration-500 hover:scale-105"
                             />
                         </div>
                         <div>
                             <img
                                 src={carouselImage3}
                                 alt="Carousel Image 3"
-                                className="shadow-2xl rounded-lg transform transition-transform duration-500 hover:scale-105"
+                                className="w-full h-64 object-cover shadow-2xl rounded-lg transform transition-transform duration-500 hover:scale-105"
                             />
                         </div>
                     </Slider>

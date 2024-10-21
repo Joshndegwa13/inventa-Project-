@@ -157,7 +157,7 @@ const Register = () => {
               <a 
                 href="#" 
                 className="text-blue-600 hover:underline"
-                onClick={() => navigate('/')}
+                onClick={() => navigate('/login')} // Updated to navigate to the Login form
               >
                 Log In
               </a>
