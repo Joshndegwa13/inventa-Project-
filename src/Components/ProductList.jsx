@@ -35,7 +35,7 @@ function ProductList({ products, setProducts }) {
   };
 
   return (
-    <div className="mt-8 px-4">
+    <div className="mt-8 px-4 mb-6">
       <h2 className="text-2xl font-bold">Product List</h2>
 
       <table className="min-w-full mt-4 table-auto border-separate border-spacing-y-2">
