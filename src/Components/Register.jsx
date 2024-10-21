@@ -1,55 +1,69 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom"; 
-import { doCreateUserWithEmailAndPassword, doSignInWithGoogle } from "../firebase/auth"; 
-import { useAuth } from "../context/authcontext";
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+// import { registerUser, doCreateUserWithEmailAndPassword, doSignInWithGoogle } from '../firebase/auth';
+import { useAuth } from '../context/authcontext';
 
-function Register() {
-  const navigate = useNavigate(); 
+const Register = () => {
+  const navigate = useNavigate();
   const { userLoggedIn } = useAuth(); // Access userLoggedIn from context
-  const [fullName, setFullName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
+  const [fullName, setFullName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [role, setRole] = useState('user'); // User role state
+  const [message, setMessage] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
   const [isRegistering, setIsRegistering] = useState(false);
   const [isSigningIn, setIsSigningIn] = useState(false);
-  const [errorMessage, setErrorMessage] = useState("");
+  const [showMessage, setShowMessage] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
-  const onSubmit = async (e) => {
+  // Handle registration form submission
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    setErrorMessage(""); // Clear any previous error messages
+    setErrorMessage('');
+    setIsLoading(true);
 
     // Validate passwords
     if (password !== confirmPassword) {
-      setErrorMessage("Passwords do not match");
+      setErrorMessage('Passwords do not match');
+      setIsLoading(false);
       return;
     }
-
-    setIsRegistering(true);
 
     try {
       // Firebase registration call
       await doCreateUserWithEmailAndPassword(email, password);
-      
-      // Clear form fields after successful registration
-      setFullName("");
-      setEmail("");
-      setPassword("");
-      setConfirmPassword("");
-      // navigate('/home'); // Commented out navigation as per your request
+
+      // Optionally register the user with a role
+      await registerUser(email, password, role);
+
+      // Show success message
+      setMessage(`${role === 'superuser' ? 'Superuser' : 'User'} registered successfully`);
+      setShowMessage(true);
+
+      // Clear form fields
+      setFullName('');
+      setEmail('');
+      setPassword('');
+      setConfirmPassword('');
+      setRole('user');
+
+      setTimeout(() => setShowMessage(false), 3000);
     } catch (error) {
       setErrorMessage(error.message);
+    } finally {
+      setIsLoading(false);
     }
-
-    setIsRegistering(false);
   };
 
+  // Handle Google Sign-in
   const onGoogleSignIn = async (e) => {
     e.preventDefault();
     if (!userLoggedIn) {
       setIsSigningIn(true);
       try {
         await doSignInWithGoogle();
-        // navigate('/home'); // Commented out navigation as per your request
       } catch (err) {
         setErrorMessage(err.message);
       }
@@ -63,7 +77,7 @@ function Register() {
         <h3 className="text-2xl font-semibold mb-4 text-center">Registration</h3>
         <p className="text-sm mb-4 text-center">Welcome to Inventa! Please enter your details</p>
 
-        <form onSubmit={onSubmit} className="flex flex-col">
+        <form onSubmit={handleSubmit} className="flex flex-col">
           <input
             type="text"
             placeholder="Enter Your Full Name*"
@@ -96,12 +110,21 @@ function Register() {
             className="placeholder:text-black bg-transparent py-2 my-2 border-b border-black focus:outline-none"
             required
           />
+          <select
+            value={role}
+            onChange={(e) => setRole(e.target.value)}
+            className="block mb-4 border border-gray-300 rounded py-2 px-4"
+          >
+            <option value="user">User</option>
+            <option value="superuser">Superuser</option>
+          </select>
+
           <button
             type="submit"
-            disabled={isRegistering}
+            disabled={isRegistering || isLoading}
             className="text-white bg-blue-500 py-2 my-4 w-full rounded hover:bg-purple-700 transition-colors duration-200"
           >
-            {isRegistering ? "Registering..." : "Register"}
+            {isLoading ? 'Registering...' : 'Register'}
           </button>
 
           {/* Google Sign-In Button */}
@@ -122,6 +145,12 @@ function Register() {
           {/* Error Message */}
           {errorMessage && <p className="text-red-500 text-center">{errorMessage}</p>}
 
+          {showMessage && (
+            <div className="mt-4 p-2 bg-green-200 text-green-800 rounded">
+              {message}
+            </div>
+          )}
+
           <div className="text-sm mt-4 text-center">
             <p>
               Already have an Account?{" "}
@@ -138,6 +167,6 @@ function Register() {
       </div>
     </div>
   );
-}
+};
 
 export default Register;
