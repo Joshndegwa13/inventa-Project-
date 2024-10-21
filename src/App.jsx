@@ -11,6 +11,7 @@ import SalesPage from './Components/SalesPage';
 import PaymentPage from './Components/PaymentPage';
 import Products from "./Components/Products";
 import Alerts from './Components/Alerts';
+
 const App = () => {
   return (
     <Routes>

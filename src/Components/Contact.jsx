@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { db } from '../firebase/firebase'; 
 import { collection, addDoc } from 'firebase/firestore';
+import Navbar from './Navbar';
 
-
-const Contact = () => {
+const Contact = ({ isSignedIn }) => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -37,7 +37,8 @@ const Contact = () => {
 
   return (
     <div className="bg-blue-50 p-6">
-      <div className="container mx-auto">
+      <Navbar isSignedIn={isSignedIn} />
+      <div className="container mx-auto mt-24"> {/* Add margin-top for navbar */}
         <h1 className="text-2xl font-bold mb-3 text-center text-blue-700">Contact Us</h1>
         <p className="mb-4 text-center text-gray-600">
           We're here to help! Please fill out the form below to get in touch.
