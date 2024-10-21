@@ -81,7 +81,7 @@ const HomePage = () => {
 
                 {/* Get Started Button with animation */}
                 <button className="mt-10 mb-16 px-8 py-4 bg-blue-600 text-white rounded-lg shadow-lg text-lg font-bold hover:bg-blue-700 transform transition-all duration-300 hover:scale-110"
-                onClick={() => navigate('/register')}
+                onClick={() => navigate('/login')}
                 >
                     Get Started
                 </button>
