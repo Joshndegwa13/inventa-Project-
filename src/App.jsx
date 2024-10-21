@@ -9,13 +9,29 @@ import Contact from './Components/Contact';
 import Reports from './Components/Reports';
 import SalesPage from './Components/SalesPage';
 import PaymentPage from './Components/PaymentPage';
-import Products from "./Components/Products";
-import Alerts from './Components/Alerts';
+import Alerts from "./Components/Alerts";
 
 const App = () => {
   return (
     <Routes>
-      <Route path="/products" element={<Products />} />
+      <Route
+        path="/add-product"
+        element={
+          <>
+            <AddProductForm
+              onAdd={(product) => setProducts([...products, product])}
+            />
+            <ProductList products={products} setProducts={setProducts} />
+          </>
+        }
+      />
+      <Route
+        path="/upload-csv"
+        element={<CSVUploadForm onProductsUpdated={setProducts} />}
+      />
+      <Route path="/sales" element={<SalesPage />} />
+      <Route path="/payment" element={<PaymentPage />} />
+
       <Route path="/" element={<HomePage />} />
       <Route path="/reports" element={<Reports />} />
       <Route path="/aboutus" element={<AboutUs />} />
@@ -25,10 +41,9 @@ const App = () => {
       <Route path="/forgotpassword" element={<ForgotPassword />} />
       <Route path="/sales" element={<SalesPage />} />
       <Route path="/pricing" element={<PaymentPage />} />
-      <Route path='alerts' element={<Alerts />} />
+      <Route path="alerts" element={<Alerts />} />
     </Routes>
-    );
+  );
 };
-
 
 export default App;
