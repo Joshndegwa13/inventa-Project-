@@ -10,6 +10,8 @@ import Reports from './Components/Reports';
 import SalesPage from './Components/SalesPage';
 import PaymentPage from './Components/PaymentPage';
 import Products from "./Components/Products";
+import Alerts from './Components/Alerts';
+
 const App = () => {
   return (
     <Routes>
@@ -23,9 +25,10 @@ const App = () => {
       <Route path="/forgotpassword" element={<ForgotPassword />} />
       <Route path="/sales" element={<SalesPage />} />
       <Route path="/pricing" element={<PaymentPage />} />
-
+      <Route path='alerts' element={<Alerts />} />
     </Routes>
     );
 };
+
 
 export default App;
