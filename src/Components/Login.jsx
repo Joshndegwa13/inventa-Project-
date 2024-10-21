@@ -19,7 +19,8 @@ function Login() {
       await doSignInWithEmailAndPassword(email, password); 
       setEmail(""); 
       setPassword(""); 
-      // navigate('/home'); 
+      // Navigate to Products section upon successful login
+      navigate('/products'); 
     } catch (error) {
       setErrorMessage(error.message);
     }
@@ -80,7 +81,6 @@ function Login() {
                 href="#" 
                 className="text-blue-600 hover:underline"
                 onClick={() => navigate('/register')} // Navigate to Registration form
-
               >
                 Register
               </a>

@@ -9,3 +9,30 @@
 
 /* Custom styles can go below */
 
+@keyframes typewriter {
+  from { width: 0; }
+  to { width: 100%; }
+}
+
+@keyframes blink-caret {
+  0% { border-color: blue; }
+  50% { border-color: transparent; }
+  100% { border-color: blue; }
+}
+
+.typewriter {
+  overflow: hidden;                  /* Ensures the text is clipped */
+  border-right: .15em solid blue;     /* The cursor */
+  white-space: nowrap;                /* Prevents text wrapping */
+  width: 0;                           /* Initially hidden */
+  animation: typewriter 4s steps(40, end) forwards, blink-caret 0.75s step-end infinite;
+}
+
+.typewriter.typing-complete {
+  border-right: none;                /* Remove the cursor once typing is done */
+}
+
+.typewriter.typing-complete::after {
+  content: '';                       /* Ensure nothing is displayed after typing */
+  animation: none;                   /* Stop the blink animation */
+}

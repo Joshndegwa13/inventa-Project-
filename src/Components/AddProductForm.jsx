@@ -22,18 +22,38 @@ const AddProductForm = ({ history, location }) => {
   }, [productToEdit]);
 
   const handleChange = (e) => {
-    setProduct({ ...product, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+
+    // Ensure number inputs are converted to numbers
+    if (["available", "reserved", "onHand", "price"].includes(name)) {
+      setProduct({ ...product, [name]: value ? Number(value) : "" });
+    } else {
+      setProduct({ ...product, [name]: value });
+    }
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Add/update product logic here
+    
+    // Validate product details before submission
+    if (!product.name || !product.sku || !product.location || !product.price) {
+      alert("Please fill in all required fields.");
+      return;
+    }
+    
+    // Here you would typically send the product to your state management or API.
+    console.log("Product submitted:", product);
+    
+    // Assuming you have a method to handle adding/updating in your parent component
+    // addOrUpdateProduct(product);
+
+    // Redirect to product table after submission
     history.push("/product-table");
   };
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
-      <div className="bg-white p-8 rounded-lg shadow-lg w-1/3 transform slide-in-right fade-in border border-gray-300">
+      <div className="bg-white p-8 rounded-lg shadow-lg w-1/3 border border-gray-300">
         <h2 className="text-2xl font-bold mb-6 text-center text-blue-600">
           {productToEdit ? "Edit Product" : "Add Product"}
         </h2>
@@ -115,8 +135,8 @@ const AddProductForm = ({ history, location }) => {
               {productToEdit ? "Update Product" : "Add Product"}
             </button>
             <button
+              type="button" // Ensure this button type is set to "button" to prevent form submission
               onClick={() => history.push("/product-table")}
-              type="button"
               className="bg-gray-300 text-black px-6 py-3 rounded-full hover:bg-gray-400 transition shadow-md hover:shadow-lg"
             >
               Cancel
