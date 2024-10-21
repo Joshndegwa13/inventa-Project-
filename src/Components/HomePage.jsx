@@ -3,9 +3,9 @@ import Slider from 'react-slick';
 import productInventoryImage from '../Components/images/product-inventory.jpg';
 import stockTrackingImage from '../Components/images/stock-tracking.jpg';
 import salesManagementImage from '../Components/images/sales-management.jpg';
-import carouselImage1 from '../Components/images/carousel-1.jpg';
-import carouselImage2 from '../Components/images/carousel-2.jpg';
-import carouselImage3 from '../Components/images/carousel-3.jpg';
+import productImage from '../Components/images/Products.png'; // Ensure this is imported correctly
+import insightsImage from '../Components/images/Insights.png'
+import inventoryImage from '../Components/images/Inventory.png'
 import { useNavigate } from 'react-router-dom';
 
 const HomePage = () => {
@@ -13,12 +13,10 @@ const HomePage = () => {
     const [typingComplete, setTypingComplete] = useState(false);
 
     useEffect(() => {
-        // Set the typing complete state after 4 seconds, when the typing animation finishes
         const timer = setTimeout(() => {
             setTypingComplete(true);
         }, 4000);
-
-        return () => clearTimeout(timer); // Cleanup the timer
+        return () => clearTimeout(timer);
     }, []);
 
     const settings = {
@@ -55,7 +53,6 @@ const HomePage = () => {
 
             {/* Main Content */}
             <main className="flex-grow flex flex-col items-center justify-center text-center p-10">
-                {/* Title with Typewriter Effect */}
                 <h2 className={`text-5xl font-bold mb-8 text-blue-800 leading-tight typewriter ${typingComplete ? 'typing-complete' : ''}`}>
                     Simple Inventory Management Software
                 </h2>
@@ -99,6 +96,13 @@ const HomePage = () => {
                     </div>
                 </div>
 
+                {/* Bold Text Above the Button */}
+                <div className="mb-8 text-center max-w-3xl mx-auto">
+                    <p className="font-bold text-3xl text-blue-800">
+                        Organize and automate your inventory at the touch of a button.
+                    </p>
+                </div>
+
                 {/* Get Started Button */}
                 <button
                     className="mt-10 mb-16 px-8 py-4 bg-blue-600 text-white rounded-lg shadow-lg text-lg font-bold hover:bg-blue-700 transform transition-all duration-300 hover:scale-110"
@@ -107,44 +111,119 @@ const HomePage = () => {
                     Get Started
                 </button>
 
-                {/* Bold Text Below the Button */}
-                <div className="mb-8 text-right max-w-3xl mx-auto">
-                    <p className="font-bold text-lg text-blue-800">
-                        Organize and automate your inventory at the touch of a button.
-                    </p>
+                {/* Section 1: Text and Image */}
+                <div className="flex flex-wrap items-start mb-8"> {/* Add bottom margin here */}
+                    <div className="w-full md:w-1/2 p-8">
+                        <h4 className="font-bold text-2xl mb-4">Track and manage your entire inventory with one easy app.</h4>
+                        <ul className="list-none space-y-4">
+                            <li className="flex items-start space-x-2">
+                                <span className="text-blue-600 text-xl">✔</span>
+                                <p className="text-gray-600">
+                                    Easily manage your existing inventory with Inventa.
+                                </p>
+                            </li>
+                            <li className="flex items-start space-x-2">
+                                <span className="text-blue-600 text-xl">✔</span>
+                                <p className="text-gray-600">
+                                    Organize inventory by Name, Location, and more.
+                                </p>
+                            </li>
+                            <li className="flex items-start space-x-2">
+                                <span className="text-blue-600 text-xl">✔</span>
+                                <p className="text-gray-600">
+                                    Add product details with a click.
+                                </p>
+                            </li>
+                        </ul>
+                    </div>
+
+                    {/* Right Section: Image */}
+                    <div className="w-full md:w-1/2 p-4 md:p-0 flex justify-end">
+                        <img
+                            src={productImage} // Use the correct variable here
+                            alt="A dashboard for managing inventory with graphs and lists."
+                            className="w-full h-auto object-contain shadow-lg md:max-w-[50%]"
+                        />
+                    </div>
                 </div>
 
-                {/* Image Carousel */}
-                <div className="relative overflow-hidden w-full max-w-3xl mx-auto mb-10">
-                    <Slider {...settings}>
-                        <div>
-                            <img
-                                src={carouselImage1}
-                                alt="Carousel Image 1"
-                                className="w-full h-64 object-cover shadow-2xl rounded-lg transform transition-transform duration-500 hover:scale-105"
-                            />
-                        </div>
-                        <div>
-                            <img
-                                src={carouselImage2}
-                                alt="Carousel Image 2"
-                                className="w-full h-64 object-cover shadow-2xl rounded-lg transform transition-transform duration-500 hover:scale-105"
-                            />
-                        </div>
-                        <div>
-                            <img
-                                src={carouselImage3}
-                                alt="Carousel Image 3"
-                                className="w-full h-64 object-cover shadow-2xl rounded-lg transform transition-transform duration-500 hover:scale-105"
-                            />
-                        </div>
-                    </Slider>
+                {/* Section 2: Image and Text */}
+                <div className="flex flex-wrap items-start mt-8"> {/* Add top margin here */}
+                    {/* Left Section: Image */}
+                    <div className="w-full md:w-1/2 p-4 md:p-0 flex justify-start">
+                        <img
+                            src={insightsImage}
+                            alt="A dashboard for managing inventory with graphs and lists."
+                            className="w-full h-auto object-contain shadow-lg md:max-w-[50%]"
+                        />
+                    </div>
+
+                    {/* Right Section: Text */}
+                    <div className="w-full md:w-1/2 p-8">
+                        <h4 className="font-bold text-2xl mb-4">Get real-time reporting insights. </h4>
+                        <ul className="list-none space-y-4">
+                            <li className="flex items-start space-x-2">
+                                <span className="text-blue-600 text-xl">✔</span>
+                                <p className="text-gray-600">
+                                    In-depth data on stocks , sales and products.
+                                </p>
+                            </li>
+                            <li className="flex items-start space-x-2">
+                                <span className="text-blue-600 text-xl">✔</span>
+                                <p className="text-gray-600">
+                                    Empower Your Team with Data-Driven Insights!
+                                </p>
+                            </li>
+                            <li className="flex items-start space-x-2">
+                                <span className="text-blue-600 text-xl">✔</span>
+                                <p className="text-gray-600">
+                                    Stay Ahead of the Competition with Predictive Insights!
+                                </p>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
+
             </main>
 
+              <div className="flex flex-wrap items-start mb-8"> {/* Add bottom margin here */}
+                    <div className="w-full md:w-1/2 p-8">
+                        <h4 className="font-bold text-2xl mb-4">Your One-Stop Solution for Inventory Success!</h4>
+                        <ul className="list-none space-y-4">
+                            <li className="flex items-start space-x-2">
+                                <span className="text-blue-600 text-xl">✔</span>
+                                <p className="text-gray-600">
+                                    Save Time, Reduce Costs, Increase Efficiency!
+                                </p>
+                            </li>
+                            <li className="flex items-start space-x-2">
+                                <span className="text-blue-600 text-xl">✔</span>
+                                <p className="text-gray-600">
+                                    Get alerted when you’re running low on stock.
+                                </p>
+                            </li>
+                            <li className="flex items-start space-x-2">
+                                <span className="text-blue-600 text-xl">✔</span>
+                                <p className="text-gray-600">
+                                    Unlock Your Business Potential!
+                                </p>
+                            </li>
+                        </ul>
+                    </div>
+
+                    {/* Right Section: Image */}
+                    <div className="w-full md:w-1/2 p-4 md:p-0 flex justify-end">
+                        <img
+                            src={inventoryImage} // Use the correct variable here
+                            alt="A dashboard for managing inventory with graphs and lists."
+                            className="w-full h-auto object-contain shadow-lg md:max-w-[50%]"
+                        />
+                    </div>
+                </div>
+
             {/* Footer */}
-            <footer className="bg-blue-700 text-white text-center p-4 mt-10">
-                <p className="text-sm">© 2024 Inventa. All rights reserved.</p>
+            <footer className="text-center p-6 bg-blue-700 text-white">
+                <p>&copy; 2024 Inventa. All Rights Reserved.</p>
             </footer>
         </div>
     );
