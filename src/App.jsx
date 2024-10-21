@@ -11,7 +11,9 @@ import SalesPage from './Components/SalesPage';
 import PaymentPage from './Components/PaymentPage';
 import Products from "./Components/Products";
 import Alerts from './Components/Alerts';
-
+import AdminPage from './Components/AdminPage';
+import NormalPage from './Components/NormalPage';
+import ProtectedRoutes from './context/ProtectedRoutes';
 const App = () => {
   return (
     <Routes>
@@ -25,8 +27,13 @@ const App = () => {
       <Route path="/forgotpassword" element={<ForgotPassword />} />
       <Route path="/sales" element={<SalesPage />} />
       <Route path="/pricing" element={<PaymentPage />} />
-      <Route path='alerts' element={<Alerts />} />
-    </Routes>
+      <Route path='/alerts' element={<Alerts />} />
+      <Route path='/normalpage' element={<NormalPage />} />
+      <Route path='/adminpage' element={
+        <ProtectedRoutes requiredRole={"userRole"} allowedRole={"superuser"}>
+          <AdminPage />
+        </ProtectedRoutes>} />
+      </Routes>
     );
 };
 

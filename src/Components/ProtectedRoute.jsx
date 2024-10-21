@@ -32,7 +32,7 @@ const ProtectedRoute = ({ children, requiredRole }) => {
     return children;
   }
 
-  return <Navigate to="/login" />;
+  return <Navigate to="/alerts" />;
 };
 
 export default ProtectedRoute;

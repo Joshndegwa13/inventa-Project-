@@ -26,13 +26,16 @@ const SideBar = () => {
           >
             <InterpreterModeIcon /> <span className="ml-2">Contacts</span>
           </li>
-          <li className="cursor-pointer text-blue-600 hover:text-purple-600 flex items-center ">
+          <li className="cursor-pointer text-blue-600 hover:text-purple-600 flex items-center"
+          onClick={() => navigate('/products')}>
             <LocalOfferIcon className="mb-6" /> <span className="ml-2 mb-6">Products</span>
           </li>
-          <li className="cursor-pointer text-blue-600 hover:text-purple-600 flex items-center">
+          <li className="cursor-pointer text-blue-600 hover:text-purple-600 flex items-center"
+          onClick={() => navigate('/sales')} >
             <ShoppingCartIcon /> <span className="ml-2">Sales</span>
           </li>
-          <li className="cursor-pointer text-blue-600 hover:text-purple-600 flex items-center">
+          <li className="cursor-pointer text-blue-600 hover:text-purple-600 flex items-center"
+          onClick={() => navigate('/alerts')}>
             <NotificationsNoneIcon className="mb-6" /> <span className="ml-2 mb-6">Alerts</span>
           </li>
           <li className="cursor-pointer text-blue-600 hover:text-purple-600 flex items-center"
@@ -43,6 +46,7 @@ const SideBar = () => {
           <li className="cursor-pointer text-blue-600 hover:text-purple-600 flex items-center"
           onClick={() => navigate('/aboutus')}
           >
+          
             <ManageHistoryIcon /> <span className="ml-2">About Us</span>
           </li>
         </ul>
