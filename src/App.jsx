@@ -13,6 +13,7 @@ import Alerts from "./Components/Alerts";
 import AddProductForm from "./Components/AddProductForm";
 import ProductList from "./Components/ProductList";
 import CSVUploadForm from "./Components/CSVUploadForm";
+
 import ProtectedRoutes from "./context/ProtectedRoutes";
 function App() {
   const [products, setProducts] = useState([]);
@@ -33,12 +34,13 @@ function App() {
             <Route
               path="/add-product"
               element={
-                <>
+                
+          
                   <AddProductForm
                     onAdd={(product) => setProducts([...products, product])}
                   />
-                  <ProductList products={products} setProducts={setProducts} />
-                </>
+                  
+                
               }
             />
             <Route
@@ -50,6 +52,7 @@ function App() {
             <Route path="/payment" element={<PaymentPage />} />
             <Route path="/alerts" element={<Alerts />} />
           </Route>
+       <Route path="/productlist" element={ <ProductList products={products} setProducts={setProducts} />} />
         </Routes>
       </div>
     

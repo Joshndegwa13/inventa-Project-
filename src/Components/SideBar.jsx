@@ -12,7 +12,7 @@ import { useNavigate } from "react-router-dom";
 const SideBar = () => {
     const navigate = useNavigate();
     return (
-        <div>
+        <div className=" border-blue-600 fixed top-0 left-0">
             <div className="lg:w-64 p-5">
         <h1 className="mb-6 text-4xl font-bold text-blue-600">Inventa</h1>
         <ul className="space-y-4 text-sm">
@@ -22,10 +22,16 @@ const SideBar = () => {
             <HomeIcon className="mt-4" /> <span className="ml-2 mt-4">Home</span>
           </li>
          
-          <li className="cursor-pointer text-blue-600 hover:text-purple-600 flex items-center ">
+          <li className="cursor-pointer text-blue-600 hover:text-purple-600 flex items-center "
+          onClick={() => navigate('/add-product')}>
+            <LocalOfferIcon /> <span className="ml-2">Add Products</span>
+          </li>
+            <li className="cursor-pointer text-blue-600 hover:text-purple-600 flex items-center "
+            onClick={() => navigate('/productlist')}>
             <LocalOfferIcon /> <span className="ml-2">Products</span>
           </li>
-          <li className="cursor-pointer text-blue-600 hover:text-purple-600 flex items-center">
+          <li className="cursor-pointer text-blue-600 hover:text-purple-600 flex items-center"
+           onClick={() => navigate('/sales')}>
             <ShoppingCartIcon /> <span className="ml-2">Sales</span>
           </li>
           <li className="cursor-pointer text-blue-600 hover:text-purple-600 flex items-center">

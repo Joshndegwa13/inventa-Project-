@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import SideBar from './SideBar';
 
 function AddProductForm({ onAdd }) {
   const [product, setProduct] = useState({
@@ -40,7 +41,10 @@ function AddProductForm({ onAdd }) {
   };
 
   return (
+    <div className="flex flex-row">
+      <SideBar />
     <form
+    
       className="max-w-lg mx-auto mt-8 p-6 bg-white shadow-md rounded-lg"
       onSubmit={handleSubmit}
     >
@@ -107,6 +111,8 @@ function AddProductForm({ onAdd }) {
         </button>
       </div>
     </form>
+    </div>
+
   );
 }
 

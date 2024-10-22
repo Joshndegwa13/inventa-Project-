@@ -115,7 +115,7 @@ const Reports = () => {
   }, []);
 
   return (
-    <div className="flex flex-col lg:flex-row lg:h-screen  font-sans ">
+    <div className="flex flex-col lg:flex-row lg:h-screen  font-sans ml-60">
       {/* Sidebar */}
       <SideBar />
 

@@ -1,5 +1,6 @@
 // SalesPage Component with Tailwind CSS Styling
 import React, { useState, useEffect } from "react";
+import SideBar from './SideBar';
 
 function SalesPage() {
   const [sales, setSales] = useState([]);
@@ -47,8 +48,10 @@ function SalesPage() {
   };
 
   return (
-    <div className="sales-page p-8 max-w-3xl mx-auto">
-      <h2 className="text-3xl font-bold mb-6 text-center">Sales Page</h2>
+    <div className="sales-page p-8  flex flex-row ml-60">
+       <SideBar />
+       <div className="pl-80">
+        {/* <h2 className="text-3xl font-bold mb-6 text-center">Sales Page</h2> */}
       <form
         onSubmit={handleSubmit}
         className="bg-white p-6 rounded shadow-md mb-8"
@@ -94,7 +97,7 @@ function SalesPage() {
         </button>
       </form>
 
-      <h3 className="text-2xl font-bold mb-4">Sales History</h3>
+      <h3 className="text-2xl font-bold mb-4 text-center pt-6">Sales History</h3>
       <ul className="bg-white p-6 rounded shadow-md">
         {sales.map((sale) => (
           <li key={sale.id} className="mb-4 border-b pb-4 last:border-none">
@@ -108,6 +111,8 @@ function SalesPage() {
           </li>
         ))}
       </ul>
+       </div>
+      
     </div>
   );
 }
