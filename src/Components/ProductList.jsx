@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import EditProductForm from "./EditProductForm";
+import SideBar from './SideBar';
 
 function ProductList({ products, setProducts }) {
   const [editingProduct, setEditingProduct] = useState([]);
@@ -35,12 +36,13 @@ function ProductList({ products, setProducts }) {
   };
 
   return (
-    <div className="mt-8 px-4 mb-6">
-      <h2 className="text-2xl font-bold">Product List</h2>
+    <div className=" px-4 mb-6 flex flex-row lg:h-screen ml-60">
+        <SideBar />
+      {/* <h2 className="text-2xl font-bold">Product List</h2> */}
 
       <table className="min-w-full mt-4 table-auto border-separate border-spacing-y-2">
         <thead>
-          <tr className="text-left bg-gray-100">
+          <tr className="text-left bg-blue-600 text-white rounded-md ">
             <th className="py-2 px-4">SKU</th>
             <th className="py-2 px-4">Name</th>
             <th className="py-2 px-4">Description</th>
