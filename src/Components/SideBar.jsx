@@ -21,19 +21,15 @@ const SideBar = () => {
           >
             <HomeIcon className="mt-4" /> <span className="ml-2 mt-4">Home</span>
           </li>
-          <li className="cursor-pointer text-blue-600 hover:text-purple-600 flex items-center"
-          onClick={() => navigate('/contact')}
-          >
-            <InterpreterModeIcon /> <span className="ml-2">Contacts</span>
-          </li>
+         
           <li className="cursor-pointer text-blue-600 hover:text-purple-600 flex items-center ">
-            <LocalOfferIcon className="mb-6" /> <span className="ml-2 mb-6">Products</span>
+            <LocalOfferIcon /> <span className="ml-2">Products</span>
           </li>
           <li className="cursor-pointer text-blue-600 hover:text-purple-600 flex items-center">
             <ShoppingCartIcon /> <span className="ml-2">Sales</span>
           </li>
           <li className="cursor-pointer text-blue-600 hover:text-purple-600 flex items-center">
-            <NotificationsNoneIcon className="mb-6" /> <span className="ml-2 mb-6">Alerts</span>
+            <NotificationsNoneIcon /> <span className="ml-2 ">Alerts</span>
           </li>
           <li className="cursor-pointer text-blue-600 hover:text-purple-600 flex items-center"
           onClick={() => navigate('/reports')}
@@ -44,6 +40,11 @@ const SideBar = () => {
           onClick={() => navigate('/aboutus')}
           >
             <ManageHistoryIcon /> <span className="ml-2">About Us</span>
+          </li>
+           <li className="cursor-pointer text-blue-600 hover:text-purple-600 flex items-center"
+          onClick={() => navigate('/contact')}
+          >
+            <InterpreterModeIcon /> <span className="ml-2">Contacts</span>
           </li>
         </ul>
       </div>
