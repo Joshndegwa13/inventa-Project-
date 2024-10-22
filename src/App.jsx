@@ -1,4 +1,4 @@
-import React , { useState }  from 'react';
+import React, { useState } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Login from './Components/Login';
 import Register from './Components/Register';
@@ -13,52 +13,47 @@ import Alerts from "./Components/Alerts";
 import AddProductForm from "./Components/AddProductForm";
 import ProductList from "./Components/ProductList";
 import CSVUploadForm from "./Components/CSVUploadForm";
-
-
-
+import ProtectedRoutes from "./context/ProtectedRoutes";
 function App() {
   const [products, setProducts] = useState([]);
 
-
   return (
     
-      <Routes>
-       
-        <Route
-          path="/add-product"
-          element={
-         <>
-            <AddProductForm
-              onAdd={(product) => setProducts([...products, product])}
-            />
-            <ProductList products={products} setProducts={setProducts} />
-          </>
-          }
-        />
-        <Route
-          path="/upload-csv"
-          element={<CSVUploadForm onProductsUpdated={setProducts} />}
-        />
-        <Route path="/sales" element={<SalesPage />} />
-      <Route path="/payment" element={<PaymentPage />} />
+      <div>
+        <Routes>
+          <Route path="/" element={<HomePage />} /> {/* Home page */}
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/forgotpassword" element={<ForgotPassword />} />
+          <Route path="/aboutus" element={<AboutUs />} />
+          <Route path="/contact" element={<Contact />} />
 
-      <Route path="/" element={<HomePage />} />
-      <Route path="/reports" element={<Reports />} />
-      <Route path="/aboutus" element={<AboutUs />} />
-      <Route path="/contact" element={<Contact />} />
-      <Route path="/login" element={<Login />} />
-      <Route path="/register" element={<Register />} />
-      <Route path="/forgotpassword" element={<ForgotPassword />} />
-      <Route path="/sales" element={<SalesPage />} />
-      <Route path="/pricing" element={<PaymentPage />} />
-      <Route path="alerts" element={<Alerts />} />
-      </Routes>
+          {/* Protected routes */}
+          <Route element={<ProtectedRoutes />}>
+            <Route
+              path="/add-product"
+              element={
+                <>
+                  <AddProductForm
+                    onAdd={(product) => setProducts([...products, product])}
+                  />
+                  <ProductList products={products} setProducts={setProducts} />
+                </>
+              }
+            />
+            <Route
+              path="/upload-csv"
+              element={<CSVUploadForm onProductsUpdated={setProducts} />}
+            />
+            <Route path="/sales" element={<SalesPage />} />
+            <Route path="/reports" element={<Reports />} />
+            <Route path="/payment" element={<PaymentPage />} />
+            <Route path="/alerts" element={<Alerts />} />
+          </Route>
+        </Routes>
+      </div>
     
   );
 }
 
-
 export default App;
-
-
-
