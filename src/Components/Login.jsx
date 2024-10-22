@@ -20,7 +20,7 @@ function Login() {
       setEmail(""); 
       setPassword(""); 
       // Navigate to Products section upon successful login
-      navigate('/products'); 
+      navigate('/reports'); 
     } catch (error) {
       setErrorMessage(error.message);
     }

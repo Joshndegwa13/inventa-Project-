@@ -16,6 +16,7 @@ import CSVUploadForm from "./Components/CSVUploadForm";
 
 
 
+
 function App() {
   const [products, setProducts] = useState([]);
 
@@ -27,12 +28,13 @@ function App() {
         <Route
           path="/add-product"
           element={
-         <>
+         
+          
             <AddProductForm
               onAdd={(product) => setProducts([...products, product])}
             />
-            <ProductList products={products} setProducts={setProducts} />
-          </>
+            
+          
           }
         />
         <Route
@@ -52,6 +54,7 @@ function App() {
       <Route path="/sales" element={<SalesPage />} />
       <Route path="/pricing" element={<PaymentPage />} />
       <Route path="alerts" element={<Alerts />} />
+       <Route path="/productlist" element={ <ProductList products={products} setProducts={setProducts} />} />
       </Routes>
     
   );
