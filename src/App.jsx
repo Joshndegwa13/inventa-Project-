@@ -30,7 +30,7 @@ function App() {
           <Route path="/contact" element={<Contact />} />
 
           {/* Protected routes */}
-          <Route element={<ProtectedRoutes />}>
+          {/* <Route element={<ProtectedRoutes />}> */}
             <Route
               path="/add-product"
               element={
@@ -51,7 +51,7 @@ function App() {
             <Route path="/reports" element={<Reports />} />
             <Route path="/payment" element={<PaymentPage />} />
             <Route path="/alerts" element={<Alerts />} />
-          </Route>
+          {/* </Route> */}
        <Route path="/productlist" element={ <ProductList products={products} setProducts={setProducts} />} />
         </Routes>
       </div>
