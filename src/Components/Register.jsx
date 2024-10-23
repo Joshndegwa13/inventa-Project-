@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-// import { registerUser, doCreateUserWithEmailAndPassword, doSignInWithGoogle } from '../firebase/auth';
+import { registerUser, doCreateUserWithEmailAndPassword, doSignInWithGoogle } from '../firebase/auth';
 import { useAuth } from '../context/authcontext';
 
 const Register = () => {

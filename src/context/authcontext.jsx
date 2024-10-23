@@ -2,42 +2,40 @@ import React, { useContext, createContext, useState, useEffect } from "react";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "../firebase/firebase";
 
+// Create a context
 const AuthContext = createContext();
 
+// Custom hook to use the auth context
 export function useAuth() {
-    return useContext(AuthContext);
+  return useContext(AuthContext);
 }
 
+// AuthProvider component
 export function AuthProvider({ children }) {
-    const [currentUser, setCurrentUser] = useState(null);
-    const [userLoggedIn, setUserLoggedIn] = useState(false);
-    const [loading, setLoading] = useState(true);
+  const [currentUser, setCurrentUser] = useState(null);
+  const [loading, setLoading] = useState(true);
 
-    useEffect(() => {
-        const unsubscribe = onAuthStateChanged(auth, initializeUser);
-        return unsubscribe; // Cleanup on unmount
-    }, []);
+  useEffect(() => {
+    // Firebase's built-in auth state listener
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      setCurrentUser(user); // Set user state
+      setLoading(false); // Done loading when auth state has been determined
+    });
 
-    async function initializeUser(user) {
-        if (user) {
-            setCurrentUser({ ...user });
-            setUserLoggedIn(true);
-        } else {
-            setCurrentUser(null);
-            setUserLoggedIn(false);
-        }
-        setLoading(false); // Set loading to false after initialization
-    }
+    // Cleanup the listener on unmount
+    return unsubscribe;
+  }, []);
 
-    const value = {
-        currentUser,
-        userLoggedIn,
-        loading,
-    };
+  // Define the context value
+  const value = {
+    currentUser,
+    userLoggedIn: !!currentUser, // Check if the user is logged in
+    loading,
+  };
 
-    return (
-        <AuthContext.Provider value={value}>
-            {!loading && children} {/* Render children only after loading */}
-        </AuthContext.Provider>
-    );
+  return (
+    <AuthContext.Provider value={value}>
+      {!loading ? children : <div>Loading...</div>} {/* Show loading or children */}
+    </AuthContext.Provider>
+  );
 }
