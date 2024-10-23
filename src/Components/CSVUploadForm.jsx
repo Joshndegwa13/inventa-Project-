@@ -44,9 +44,9 @@ function CSVUploadForm() {
     <div className="csv-upload-page p-8 flex flex-row ml-60">
       <SideBar />
       <div className="pl-80">
-        <h2 className="text-3xl font-bold mb-6 text-center">
+        {/* <h2 className="text-3xl font-bold mb-6 text-center">
           Upload Product CSV
-        </h2>
+        </h2> */}
         <form
           onSubmit={handleSubmit}
           className="bg-white p-6 rounded shadow-md mb-8"

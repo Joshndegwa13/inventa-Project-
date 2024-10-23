@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from "react";
 import SideBar from "./SideBar";
 import { useAlerts } from "../context/AlertContext"; // Import the useAlerts hook
+import CSVUploadForm from "./CSVUploadForm";
 
 function SalesPage() {
   const [sales, setSales] = useState([]);
@@ -61,9 +62,11 @@ function SalesPage() {
   };
 
   return (
+    <div>
+      <CSVUploadForm />
     <div className="sales-page p-8 flex flex-row ml-60">
       <SideBar />
-      <div>
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <form
           onSubmit={handleSubmit}
           className="bg-white p-6 rounded shadow-md mb-8"
@@ -125,6 +128,7 @@ function SalesPage() {
           ))}
         </ul>
       </div>
+    </div>
     </div>
   );
 }

@@ -13,13 +13,14 @@ import Alerts from "./Components/Alerts";
 import AddProductForm from "./Components/AddProductForm";
 import ProductList from "./Components/ProductList";
 import CSVUploadForm from "./Components/CSVUploadForm";
+import ProtectedRoutes from "./context/ProtectedRoutes"; 
+import { AuthProvider } from "./context/authcontext"; 
 
-import ProtectedRoutes from "./context/ProtectedRoutes";
 function App() {
   const [products, setProducts] = useState([]);
 
   return (
-    
+    <AuthProvider>
       <div>
         <Routes>
           <Route path="/" element={<HomePage />} /> {/* Home page */}
@@ -30,17 +31,11 @@ function App() {
           <Route path="/contact" element={<Contact />} />
 
           {/* Protected routes */}
-          {/* <Route element={<ProtectedRoutes />}> */}
+          <Route element={<ProtectedRoutes />}>
             <Route
               path="/add-product"
               element={
-                
-          
-                  <AddProductForm
-                    onAdd={(product) => setProducts([...products, product])}
-                  />
-                  
-                
+                <AddProductForm onAdd={(product) => setProducts([...products, product])} />
               }
             />
             <Route
@@ -51,11 +46,12 @@ function App() {
             <Route path="/reports" element={<Reports />} />
             <Route path="/payment" element={<PaymentPage />} />
             <Route path="/alerts" element={<Alerts />} />
-          {/* </Route> */}
-       <Route path="/productlist" element={ <ProductList products={products} setProducts={setProducts} />} />
+          </Route>
+
+          <Route path="/productlist" element={<ProductList products={products} setProducts={setProducts} />} />
         </Routes>
       </div>
-    
+    </AuthProvider>
   );
 }
 
