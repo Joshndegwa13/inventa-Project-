@@ -40,13 +40,14 @@ const Reports = () => {
         { date: "2023-10-04", total_sales: 18000, expenses: 9000, profits: 9000 },
         { date: "2023-10-05", total_sales: 22000, expenses: 11000, profits: 11000 },
     ]);
+    const apiUrl = import.meta.env.VITE_API_URL;
 
   // Fetch data from the backend
     // Fetch finance metrics
     useEffect(() => {
 		const fetchLatestFinanceData = async () => {
 			try {
-				const response = await fetch('http://localhost:5555/api/finances/latest');
+				const response = await fetch(`${apiUrl}/api/finances/latest`);
 				if (!response.ok) throw new Error('Network response was not ok');
 				const data = await response.json();
 
@@ -68,7 +69,7 @@ const Reports = () => {
     // Fetch deliveries
     const fetchDeliveries = async () => {
       try {
-        const response = await fetch("http://localhost:5555/api/delivery/");
+        const response = await fetch(`${apiUrl}/api/delivery/`);
         if (!response.ok) throw new Error("Network response was not ok");
         const data = await response.json();
         setDeliveries(data);
@@ -80,7 +81,7 @@ const Reports = () => {
     // Fetch sales data
     const fetchSalesData = async () => {
       try {
-        const response = await fetch("http://localhost:5555/api/sales?aggregate=true");
+        const response = await fetch(`${apiUrl}/api/sales?aggregate=true`);
         if (!response.ok) throw new Error("Network response was not ok");
         const data = await response.json();
         setSalesData(data);
@@ -92,7 +93,7 @@ const Reports = () => {
     // Fetch finance data
     const fetchFinanceData = async () => {
       try {
-        const response = await fetch('http://localhost:5555/api/finances');
+        const response = await fetch(`${apiUrl}/api/finances`);
         if (!response.ok) throw new Error('Network response was not ok');
         const data = await response.json();
         const formattedData = data.map(report => ({
