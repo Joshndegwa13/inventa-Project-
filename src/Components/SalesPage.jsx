@@ -9,10 +9,10 @@ function SalesPage() {
     stock_amount: "",
     sku: "",
   });
-  const baseUrl = import.meta.env.VITE_API_BASE_URL;
+  const apiUrl = import.meta.env.VITE_API_URL;
 
   useEffect(() => {
-    fetch(`${baseUrl}/sales/`)
+    fetch(`${apiUrl}/api/sales/`)
       .then((res) => res.json())
       .then((data) => setSales(data))
       .catch((error) => console.error("Error fetching sales:", error));
@@ -27,7 +27,7 @@ function SalesPage() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    fetch(`${baseUrl}/sales/`, {
+    fetch(`${apiUrl}/api/sales/`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(newSale),
