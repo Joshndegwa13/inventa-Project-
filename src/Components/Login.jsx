@@ -19,12 +19,14 @@ function Login() {
       await doSignInWithEmailAndPassword(email, password); 
       setEmail(""); 
       setPassword(""); 
-      // Navigate to Products section upon successful login
+      console.log('Login successful');
+      // Navigate to Reports section upon successful login
       navigate('/reports'); 
     } catch (error) {
       setErrorMessage(error.message);
     }
     setIsSigningIn(false); 
+
   };
 
   if (loading) {
