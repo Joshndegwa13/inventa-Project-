@@ -4,16 +4,17 @@ import SideBar from './SideBar';
 
 function ProductList({ products, setProducts }) {
   const [editingProduct, setEditingProduct] = useState([]);
+  const apiUrl = import.meta.env.VITE_API_URL;
 
   useEffect(() => {
-    fetch("http://localhost:5555/api/products/")
+    fetch(`${apiUrl}/api/products/`)
       .then((res) => res.json())
       .then((data) => setProducts(data))
       .catch((error) => console.error("Error:", error));
   }, [setProducts]);
 
   const handleDelete = (sku) => {
-    fetch(`http://localhost:5555/api/products/${sku}`, {
+    fetch(`${apiUrl}/api/products/${sku}`, {
       method: "DELETE",
     })
       .then(() => {

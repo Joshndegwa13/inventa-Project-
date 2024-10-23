@@ -11,6 +11,9 @@ function AddProductForm({ onAdd }) {
     cost: "",
   });
 
+  const apiUrl = import.meta.env.VITE_API_URL;
+
+
   const handleChange = (e) => {
     setProduct({
       ...product,
@@ -20,7 +23,7 @@ function AddProductForm({ onAdd }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    fetch("http://localhost:5555/api/products/", {
+    fetch(`${apiUrl}/api/products/`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(product),
@@ -45,7 +48,7 @@ function AddProductForm({ onAdd }) {
       <SideBar />
     <form
     
-      className="max-w-lg mx-auto mt-8 p-6 bg-white shadow-md rounded-lg"
+      className="max-w-lg mx-auto mt-8 p-6 bg-white shadow-md rounded-lg container px-4 sm:px-6 lg:px-8"
       onSubmit={handleSubmit}
     >
       <h2 className="text-2xl font-bold mb-6">Add New Product</h2>

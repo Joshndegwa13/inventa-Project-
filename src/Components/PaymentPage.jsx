@@ -7,7 +7,7 @@ function PaymentPage() {
     plan: "",
     annualPlan: false,
   });
-  const baseUrl = import.meta.env.VITE_API_BASE_URL;
+  const apiUrl = import.meta.env.VITE_API_URL;
 
   const handleChange = (e) => {
     setFormData({
@@ -19,7 +19,7 @@ function PaymentPage() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    fetch(`${baseUrl}/subscription`, {
+    fetch(`${apiUrl}/subscription`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(formData),
