@@ -11,6 +11,9 @@ function AddProductForm({ onAdd }) {
     cost: "",
   });
 
+  const apiUrl = import.meta.env.VITE_API_URL;
+
+
   const handleChange = (e) => {
     setProduct({
       ...product,
@@ -20,7 +23,7 @@ function AddProductForm({ onAdd }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    fetch("http://localhost:5555/api/products/", {
+    fetch(`${apiUrl}/api/products/`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(product),

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 
 function CSVUploadForm() {
   const [file, setFile] = useState(null);
+   const apiUrl = import.meta.env.VITE_API_URL;
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -13,7 +14,7 @@ function CSVUploadForm() {
     const formData = new FormData();
     formData.append("file", file);
 
-    fetch("http://localhost:5555/api/products/upload", {
+    fetch(`${apiUrl}/api/products/upload`, {
       method: "POST",
       body: formData,
     })

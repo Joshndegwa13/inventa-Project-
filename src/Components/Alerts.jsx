@@ -2,11 +2,12 @@ import React, { useState, useEffect } from 'react';
 
 const Alerts = () => {
     const [alerts, setAlerts] = useState([]);
+    const apiUrl = import.meta.env.VITE_API_URL;
 
     // Fetch alerts 
     const fetchAlerts = async () => {
         try {
-            const response = await fetch('http://127.0.0.1:5000');
+            const response = await fetch(`${apiUrl}`);
             const data = await response.json();
 
             // Check if the API returns low stock and new orders

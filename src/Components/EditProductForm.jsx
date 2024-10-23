@@ -4,6 +4,7 @@ import React, { useState } from "react";
 
 function EditProductForm({ product, onUpdate }) {
   const [updatedProduct, setUpdatedProduct] = useState({ ...product });
+  const apiUrl = import.meta.env.VITE_API_URL;
 
   const handleChange = (e) => {
     setUpdatedProduct({
@@ -14,7 +15,7 @@ function EditProductForm({ product, onUpdate }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    fetch(`http://localhost:5555/api/products/${updatedProduct.id}`, {
+    fetch(`${apiUrl}/api/products/${updatedProduct.id}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(updatedProduct),
