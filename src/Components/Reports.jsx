@@ -203,7 +203,7 @@ const Reports = () => {
       </div>
     </motion.div>
 
-    <motion.div
+{/*     <motion.div
       className='bg-white bg-opacity-50 backdrop-filter backdrop-blur-lg shadow-lg rounded-xl p-6 border '
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
@@ -230,7 +230,7 @@ const Reports = () => {
           </BarChart>
         </ResponsiveContainer>
       </div>
-    </motion.div>
+    </motion.div> */}
 
     {/* line retension */}
     <motion.div
